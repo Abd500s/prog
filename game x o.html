@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>X and O</title>
+  <style>
+  .game{
+      width: 255px;
+      text-align: center;
+	  font-family: sans-serif;
+	  margin: auto;
+	  color: wait;
+	  font-weight:500;
+    }
+	.title{
+		background-color:red;
+		padding:5px 0;
+		margin:5px 0;
+		
+	}
+	span{
+	   color:yellow;
+	}
+	
+	.square{
+	   width:80px;
+	   height:80px;
+	   margin:2px;
+	   float:left;
+	   background-color:red;
+	   font-size:50px;
+	}
+	.square:hover{
+		background:black;
+		cursor:pointer;
+	}
+  </style>
+  </head>
+  <body>
+   
+    <div class="game">
+  
+  <div class="title"><span>X O </span> GAME </div>
+  
+  <div class="square"id="item1" onclick="game(this.id)"></div>
+  <div class="square"id="item2" onclick="game(this.id)"></div>
+  <div class="square"id="item3" onclick="game(this.id)"></div>
+  
+  <div class="square"id="item4" onclick="game(this.id)"></div>
+  <div class="square"id="item5" onclick="game(this.id)"></div>
+  <div class="square"id="item6" onclick="game(this.id)"></div>
+  
+  <div class="square"id="item7" onclick="game(this.id)"></div>
+  <div class="square"id="item8" onclick="game(this.id)"></div>
+  <div class="square"id="item9" onclick="game(this.id)"></div>
+  
+</div>
+
+  <script>
+  
+ let turn = 'X';
+ let title = document.querySelector('.title');
+ let squares = []
+ 
+    function end(num1,num2,num3){
+		title.innerHTML = '${squares[num1]}winner';
+	   ducument.getElementById('item'+ num1).Style.background = '#000';
+	   ducument.getElementById('item'+ num2).Style.background = '#000';
+	   ducument.getElementById('item'+ num3).Style.background = '#000';
+	   
+	   setInterval(function(){title.innerHTML += '.'},1000);
+	   setTimout(function(){location.reload()},4000);
+	   
+   }
+   
+    function win(){
+	    for(let i = 1; i<10; i++){
+			squares[i] = ducument.getElementById('item' + i).innerHTML;
+		}
+		//check horizontal
+		if(squares[1] == squares[2] && squares[2] == squares[3] && squares[1] !=''){
+			end(1,2,3);
+		}
+		else if(squares[4] == squares[5] && squares[5] == squares[6] && squares[4] !=''){
+			end(4,5,6);
+		}
+		else if(squares[7] == squares[8] && squares[8] == squares[9] && squares[7] !=''){
+			
+			end(7,8,9);
+		}
+		
+		//check vertical
+		else if(squares[1] == squares[4] && squares[4] == squares[7] && squares[1] !=''){
+			
+			end(1,4,7);
+		}
+		else if(squares[2] == squares[5] && squares[5] == squares[8] && squares[2] !=''){
+			
+			end(2,5,8);
+		}
+		else if(squares[3] == squares[6] && squares[6] == squares[9] && squares[3] !=''){
+			
+			end(3,6,9);
+		}
+		
+		//check diagonal
+		else if(squares[1] == squares[5] && squares[5] == squares[9] && squares[5] !=''){
+			
+			end(1,5,9);
+		}
+		else if(squares[3] == squares[5] && squares[5] == squares[7] && squares[5] !=''){
+			
+			end(3,5,7);
+		}
+			
+   	   
+   } 
+   function game(id)
+   {
+      let element = document.getElementById(id);
+	  if (turn === 'X' && game.innerHTML == '')
+	  {  
+	      element.innerHTML = 'X';
+		  turn = 'O';
+		  title.innerHTML = 'O';
+   
+	   }
+	   else if (turn === 'O' && game.innerHTML == '')
+	   {
+	      element.innerHTML = 'O';
+		  turn = 'X';
+		  title.innerHTML = 'X';
+	   }
+		 win();
+   }
+ 
+  </script>
+  </body>
+  </html>
+ 
